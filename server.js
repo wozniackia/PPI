@@ -25,6 +25,9 @@ app.get('/add', (req, res) => {
 app.get('/search', (req, res) => {
   res.render('search')
 });
+app.get('/form', (req, res) => {
+  res.render('form')
+});
 
 app.get('/*', (req, res) => {
   res.render('404')

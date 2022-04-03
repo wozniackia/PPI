@@ -67,7 +67,6 @@ function handleFormSubmit(event) {
             rating: rating.value,
             isLiked: radio[0].checked
         }
-        console.log(data)
         localStorage.setItem("book", JSON.stringify(data));
     }
 }

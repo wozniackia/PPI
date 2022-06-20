@@ -119,6 +119,25 @@ router.post('/addBook', async (req, res) => {
     });
 })
 
+router.post('/addBookForm', async (req, res) => {
+  console.log(req.body)
+  const dbConnect = dbo.getDb();
+  let newBook = {
+    name: req.body.name,
+    author: req.body.author,
+    release_date: Number(req.body.release),
+    average: 0.0,
+    reviews: {},
+    cover: req.body.cover
+  }
+  try {
+    const result = dbConnect.collection("bookList").insertOne(newBook);
+    res.status(204).send();
+  } catch (err) {
+    res.status(400).send();
+  }
+})
+
 router.post('/addReview', async (req, res) => {
   console.log('tu')
   const dbConnect = dbo.getDb();

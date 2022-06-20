@@ -11,9 +11,9 @@ function updateRating () {
   for(let i = 0; i < one.length; i++) {
       axios.get('https://wozniacki-booksapp.herokuapp.com/books?name='+text[i].innerHTML)
           .then(function (response) {
-              console.log(text[i].innerHTML)
-              console.log(response.data.average)
-              console.log(i)
+              // console.log(text[i].innerHTML)
+              // console.log(response.data.average)
+              // console.log(i)
               one[i].style.color = "";
               two[i].style.color = "";
               three[i].style.color = "";
@@ -58,7 +58,7 @@ let numberOfPages;
 axios.get('https://wozniacki-booksapp.herokuapp.com/books')
   .then(function (response) {
     //pag.innerHTML = start
-    for(let i = 0; i < Math.floor(response.data.length/9); i++) {
+    for(let i = 0; i < Math.ceil(response.data.length/9); i++) {
       pag.innerHTML += `<li class="page-item" onclick="fetchCovers(${i+1}); fetchRatings(${i+1}); setTimeout(updateRating,1000);"><a class="page-link" href="#">${i+1}</a></li>`
     }   
     // pag.innerHTML += end

@@ -17,15 +17,20 @@ const bookName8 = document.getElementById('bookName8')
 const bookCover9 = document.getElementById('bookCover9')
 const bookName9 = document.getElementById('bookName9')
 
+const names = [bookName1, bookName2, bookName3, bookName4, bookName5, bookName6, bookName7, bookName8, bookName9];
+const covers = [bookCover1, bookCover2, bookCover3, bookCover4, bookCover5, bookCover6, bookCover7, bookCover8, bookCover9];
+
 function fetchRatings(pageNum) {
     axios.get('https://wozniacki-booksapp.herokuapp.com/books')
         .then(function( response) {
             for(let i = (pageNum-1)*9; i < 9*pageNum; i++) {
+                try {
                 if(response.data[i].average != 0) {
                     document.getElementById(`bookRating${i-((pageNum-1)*9-1)}`).innerHTML = `Average: ${response.data[i].average}`
                 } else {
                     document.getElementById(`bookRating${i-((pageNum-1)*9-1)}`).innerHTML = `No ratings yet :(`
                 }
+            } catch(err) {}
             }
         })
 }
@@ -33,24 +38,17 @@ function fetchRatings(pageNum) {
 function fetchCovers(pageNum) {
   axios.get('https://wozniacki-booksapp.herokuapp.com/books?items='+(9*pageNum))
   .then(function (response) {
-      bookName1.innerHTML = response.data[0+(pageNum-1)*9].name
-      bookCover1.src = response.data[0+(pageNum-1)*9].cover
-      bookName2.innerHTML = response.data[1+(pageNum-1)*9].name
-      bookCover2.src = response.data[1+(pageNum-1)*9].cover
-      bookName3.innerHTML = response.data[2+(pageNum-1)*9].name
-      bookCover3.src = response.data[2+(pageNum-1)*9].cover
-      bookName4.innerHTML = response.data[3+(pageNum-1)*9].name
-      bookCover4.src = response.data[3+(pageNum-1)*9].cover
-      bookName5.innerHTML = response.data[4+(pageNum-1)*9].name
-      bookCover5.src = response.data[4+(pageNum-1)*9].cover
-      bookName6.innerHTML = response.data[5+(pageNum-1)*9].name
-      bookCover6.src = response.data[5+(pageNum-1)*9].cover
-      bookName7.innerHTML = response.data[6+(pageNum-1)*9].name
-      bookCover7.src = response.data[6+(pageNum-1)*9].cover
-      bookName8.innerHTML = response.data[7+(pageNum-1)*9].name
-      bookCover8.src = response.data[7+(pageNum-1)*9].cover
-      bookName9.innerHTML = response.data[8+(pageNum-1)*9].name
-      bookCover9.src = response.data[8+(pageNum-1)*9].cover
+    console.log(response.data)
+    console.log(9-(pageNum*9-response.data.length))
+    for(let i = 0; i < 9; i++) {
+        if(i < 9-(pageNum*9-response.data.length)) {
+            names[i].innerHTML = response.data[i+(pageNum-1)*9].name
+            covers[i].src = response.data[i+(pageNum-1)*9].cover
+        } else  {
+            names[i].innerHTML = "No book"
+            covers[i].src = "https://via.placeholder.com/420x500.jpg?text=No+book+yet"
+        }
+    }
   })
   .catch(function (error) {
     console.log(error);

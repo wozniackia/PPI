@@ -1,8 +1,10 @@
 const title = document.getElementById("inputTitle");
 const author = document.getElementById("inputAuthor");
+const release_date = document.getElementById("inputRelease");
 const radio = document.getElementsByName("bookRadio");
 const rating = document.getElementById("selectRating");
 const checkbox = document.getElementsByClassName("form-check-input");
+const cover = document.getElementById("inputCover");
 
 function handleFormSubmit(event) {
     event.preventDefault();
@@ -25,6 +27,15 @@ function handleFormSubmit(event) {
     } else {
         author.classList.remove("is-invalid");
         author.classList.add("is-valid");
+    }
+
+    if(release_date.value.length <= 0) {
+        release_date.classList.add("is-invalid");
+        release_date.classList.remove("is-valid");
+        isValid = false;
+    } else {
+        release_date.classList.remove("is-invalid");
+        release_date.classList.add("is-valid");
     }
 
     if(!radio[0].checked && !radio[1].checked) {
@@ -52,6 +63,15 @@ function handleFormSubmit(event) {
             checkbox[i].classList.add("is-valid");
         }
     }
+    
+    if(cover.value.length <= 0) {
+        cover.classList.add("is-invalid");
+        cover.classList.remove("is-valid");
+        isValid = false;
+    } else {
+        cover.classList.remove("is-invalid");
+        cover.classList.add("is-valid");
+    }
 
     if(isValid) {
         let arr = []
@@ -63,11 +83,27 @@ function handleFormSubmit(event) {
         let data = {
             title: title.value,
             author: author.value,
+            release_date: release_date.value,
             genres: arr,
             rating: rating.value,
-            isLiked: radio[0].checked
+            isLiked: radio[0].checked,
+            cover: cover.value
         }
         localStorage.setItem("book", JSON.stringify(data));
+
+        axios.post('http://localhost:3000/books/addBookForm', {
+            name: title.value,
+            author: author.value,
+            release_date: Number(release_date.value),
+            cover: cover.value
+
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
 }
 

@@ -54,15 +54,28 @@ function updateRating () {
   }
 }
 
-let numberOfPages;
-axios.get('https://wozniacki-booksapp.herokuapp.com/books')
-  .then(function (response) {
-    //pag.innerHTML = start
-    for(let i = 0; i < Math.ceil(response.data.length/9); i++) {
-      pag.innerHTML += `<li class="page-item" onclick="fetchCovers(${i+1}); fetchRatings(${i+1}); setTimeout(updateRating,1000);"><a class="page-link" href="#">${i+1}</a></li>`
-    }   
-    // pag.innerHTML += end
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+function addPagination(pageNum) {
+  let numberOfPages;
+  pag.innerHTML = "";
+  axios.get('https://wozniacki-booksapp.herokuapp.com/books')
+    .then(function (response) {
+      //pag.innerHTML = start
+      for(let i = 0; i < Math.ceil(response.data.length/9); i++) {
+        if(i == pageNum-1) {
+          pag.innerHTML += `<li class="page-item active" onclick="fetchCovers(${i+1}); fetchRatings(${i+1}); setTimeout(updateRating,1000);"><a class="page-link" href="#">${i+1}</a></li>`
+        } else {
+          pag.innerHTML += `<li class="page-item" onclick="fetchCovers(${i+1}); fetchRatings(${i+1}); setTimeout(updateRating,1000);"><a class="page-link" href="#">${i+1}</a></li>`
+        }
+      }   
+      // pag.innerHTML += end
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+addPagination(1);
+
+function getCurrentPage() {
+  return document.getElementsByClassName('page-item active')[0].innerHTML
+}

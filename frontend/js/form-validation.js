@@ -91,7 +91,7 @@ function handleFormSubmit(event) {
         }
         localStorage.setItem("book", JSON.stringify(data));
 
-        axios.post('http://localhost:3000/books/addBookForm', {
+        axios.post('https://wozniacki-booksapp.herokuapp.com/books/addBookForm', {
             name: title.value,
             author: author.value,
             release_date: Number(release_date.value),

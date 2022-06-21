@@ -21,6 +21,8 @@ const names = [bookName1, bookName2, bookName3, bookName4, bookName5, bookName6,
 const covers = [bookCover1, bookCover2, bookCover3, bookCover4, bookCover5, bookCover6, bookCover7, bookCover8, bookCover9];
 
 function fetchRatings(pageNum) {
+    addPagination(pageNum);
+    console.log('page: ' + pageNum)
     axios.get('https://wozniacki-booksapp.herokuapp.com/books')
         .then(function( response) {
             for(let i = (pageNum-1)*9; i < 9*pageNum; i++) {
@@ -38,8 +40,6 @@ function fetchRatings(pageNum) {
 function fetchCovers(pageNum) {
   axios.get('https://wozniacki-booksapp.herokuapp.com/books?items='+(9*pageNum))
   .then(function (response) {
-    console.log(response.data)
-    console.log(9-(pageNum*9-response.data.length))
     for(let i = 0; i < 9; i++) {
         if(i < 9-(pageNum*9-response.data.length)) {
             names[i].innerHTML = response.data[i+(pageNum-1)*9].name

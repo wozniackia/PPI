@@ -45,6 +45,61 @@
       <button class="btn btn-light" onclick="toggleLocalStorage(); darkMode();"><i class="bi bi-lightbulb-fill"></i></button>
     </div>
   </nav>
+
+  <div class="container-fluid">
+    <div class="toast-container position-fixed top-50 start-50 translate-middle-x p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">Edit book</strong>
+        </div>
+        <div class="toast-body">
+          <div class="wrapper">
+            <label for="inputTitle" class="form-label">Book title:</label>
+            <input type="text" class="form-control needs-validation" id="inputTitle">
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter book's title.
+            </div>
+          </div>
+          <div class="wrapper">
+            <label for="inputAuthor" class="form-label">Book author:</label>
+            <input type="text" class="form-control needs-validation" id="inputAuthor">
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter book's author.
+            </div>
+          </div>
+          <div class="wrapper">
+            <label for="inputRelease" class="form-label">Release date:</label>
+            <input type="text" class="form-control needs-validation" id="inputRelease">
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter book's release year.
+            </div>
+          </div>
+          <div class="wrapper">
+            <label for="inputCover" class="form-label">Book cover:</label>
+            <input type="text" class="form-control needs-validation" id="inputCover">
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please enter a valid url.
+            </div>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary btn-sm" onclick="updateBook()">Save</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <div id="loading" class="position-absolute top-50 start-50 translate-middle bg-light">
     <div class="progress position-absolute top-50 start-50 translate-middle" style="width: 50%">
@@ -71,6 +126,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating1"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -90,6 +146,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating2"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -109,6 +166,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating3"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -129,6 +187,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating4"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -148,6 +207,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating5"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -167,6 +227,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating6"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -187,6 +248,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating7"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -206,6 +268,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating8"></div>
+                <button type="button" class="btn btn-light toast-button" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -225,6 +288,7 @@
                   <i class="fa-solid fa-star five-star"></i>
                 </small>
                 <div class="text-muted" id="bookRating9"></div>
+                <button type="button" class="btn btn-light" id="liveToastBtn" >Edit</button>
               </div>
             </div>
           </div>
@@ -247,5 +311,6 @@
   <script src="/frontend/js/give-rating.js"></script>
   <script src="/frontend/js/loading.js"></script>
   <script src="/frontend/js/dark-mode.js"></script>
+  <script src="/frontend/js/edit.js"></script>
 </body>
 </html>

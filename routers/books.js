@@ -165,6 +165,57 @@ router.post('/addReview', async (req, res) => {
   }
 })
 
+router.post('/editBook', async (req, res) => {
+  const dbConnect = dbo.getDb();
+
+  let result = await dbConnect
+    .collection('bookList')
+    .findOne({ name: req.body.oldName })
+  
+    let newName = result.name
+  if(req.body.name) {
+    newName = req.body.name;
+  }
+
+  let newAuthor = result.author
+  if(req.body.author) {
+    newAuthor = req.body.author;
+  }
+
+  let newRelease = result.release_date
+  if(req.body.release) {
+    newRelease = Number(req.body.release);
+  }
+
+  let newCover = result.cover
+  if(req.body.cover && req.body.cover != 'Cover') {
+    newCover = req.body.cover;
+  }
+
+  console.log(req.body);
+  console.log(result);
+  console.log({
+    name: newName,
+    author: newAuthor,
+    release_date: newRelease,
+    average: result.average,
+    cover: newCover,
+    reviews: result.reviews
+  })
+
+  const result2 = await dbConnect.collection("bookList").replaceOne({"name": result.name}, {
+    name: newName,
+    author: newAuthor,
+    release_date: newRelease,
+    average: result.average,
+    cover: newCover,
+    reviews: result.reviews
+  });
+  console.log(result2);
+  res.status(204).send();
+  
+})
+
 function asyncPush(a, val, cb) {
   setTimeout(function () { a.push(val); cb();}, 0);
 }

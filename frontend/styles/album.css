@@ -4,3 +4,7 @@
   height: 500px;
   object-fit: cover;
 }
+
+.toast-container {
+  z-index: 1000;
+}
